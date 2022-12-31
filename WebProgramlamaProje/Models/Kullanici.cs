@@ -13,10 +13,15 @@ public partial class Kullanici
     [Key]
     public long Id { get; set; }
 
+    [Required(ErrorMessage = "Bu Alan Boş Geçilemez")]
+    
     public string TamAd { get; set; } = null!;
 
+    [Required(ErrorMessage = "Bu Alan Boş Geçilemez")]
     public string KullaniciAd { get; set; } = null!;
 
+    [StringLength(10)]
+    [Required(ErrorMessage = "Bu Alan Boş Geçilemez")]
     public string Sifre { get; set; } = null!;
 
     public string Rol { get; set; } = null!;
