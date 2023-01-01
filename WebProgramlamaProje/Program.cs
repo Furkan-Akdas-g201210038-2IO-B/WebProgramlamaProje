@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using WebProgramlamaProje.Data;
@@ -5,6 +6,16 @@ using WebProgramlamaProje.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "NetCoreMvcAuth";
+
+        options.LoginPath = new PathString("/Kullanici/GirisYap");
+        options.AccessDeniedPath = new PathString("/Kullanici/GirisYap");
+
+    });
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>(o => o.UseSqlite(builder.
                 Configuration.GetConnectionString("DefaultConnection")));
@@ -24,7 +35,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

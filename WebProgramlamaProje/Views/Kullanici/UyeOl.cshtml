@@ -1,6 +1,11 @@
 ﻿
 @model Kullanici;
 
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 <section class="vh-50 bg-image"
          style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -11,26 +16,33 @@
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                            <form method="post" asp-action="UyeOl" asp-controller="Kullanici">
+                            <form id="form" method="post" asp-action="UyeOl" asp-controller="Kullanici">
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" asp-for="TamAd" placeholder="Tam adınızı giriniz" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example1cg">Tam Ad</label>
+                                    <label  class="form-label" for="form3Example1cg">Tam Ad</label>
+                                    <input  type="text" asp-for="TamAd" placeholder="Tam adınızı giriniz" class="form-control form-control-lg" />
+                                    <span  style="color:red" asp-validation-for="TamAd"></span>
+                                    
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="email" asp-for="KullaniciAd" placeholder="Kullanıcı Adınızı Giriniz" class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example3cg">Kullanıcı Ad</label>
+                                    <input type="email" asp-for="KullaniciAd" placeholder="Kullanıcı Adınızı Giriniz" class="form-control form-control-lg" />
+                                    <span  style="color:red" asp-validation-for="KullaniciAd"></span>
+                                    
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" asp-for="Sifre" placeholder="Şifrenizi Giriniz" class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example4cg">Şifre</label>
+                                    <input  type="password" asp-for="Sifre" placeholder="Şifrenizi Giriniz" class="form-control form-control-lg" />
+                                    <span style="color:red" asp-validation-for="Sifre"></span>
+                                    
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" asp-for="Sifre" placeholder="Şifrenizi Tekrar Giriniz" class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example4cdg">Tekrar Şifre</label>
+                                    <input type="password" id="inputTekrarSifre"  placeholder="Şifrenizi Tekrar Giriniz" class="form-control form-control-lg" />
+                                    <span id="SpanTekrarSifre" style="color:red" asp-validation-for="Sifre">@ViewData["Hata"]</span>
                                 </div>
 
                                 <div class="form-check d-flex justify-content-center mb-5">
@@ -39,9 +51,9 @@
                                         I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
                                     </label>
                                 </div>
-
+                                
                                 <div class="d-flex justify-content-center">
-                                    <button type="submit"
+                                    <button  type="submit"
                                             class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
                                         Kayıt Ol
                                     </button>
@@ -61,3 +73,8 @@
         </div>
     </div>
 </section>
+
+<script></script>
+
+
+<script src="~/js/uyeoldogrulama.js"></script>             

@@ -1,0 +1,68 @@
+﻿@model Kitap
+
+<form asp-action="Arama" asp-controller="Arama" method="post">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Search</label>
+    <input name="TurAdi" placeholder="Tur Adına Göre Ara" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    
+  </div>
+  
+<br />
+
+<label style="color:grey;font-size:large" class="form-label">Filtrele</label>
+<select name="Filtre" class="form-select" aria-label="Default select example">
+  <option value="0" selected>Open this select menu</option>
+  <option value="1">En Çok Puan Alan</option>
+  
+</select>
+    <button type="submit" class="btn btn-primary">Ara</button>
+</form>
+<br />
+<br />
+
+
+
+
+<table class="table table-bordered">
+
+    <tr >
+
+        
+        <th>@Html.DisplayNameFor(model => model.Ad)</th>
+          
+        <th>@Html.DisplayNameFor(model => model.YazarAdi)</th>
+          
+        <th>@Html.DisplayNameFor(model => model.Tur)</th>
+          
+        <th>@Html.DisplayNameFor(model => model.Puan)</th>
+    </tr>
+
+    
+
+    @foreach (var item in (ViewData["Kitaplar"] as List<Kitap>))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YazarAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Puan)
+            </td>
+            <td>
+                @*Html.ActionLink("Edit", "Edit", new {  id=item.Id  })
+            @Html.ActionLink("Details", "Details", new {  id=item.Id  })
+            @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })*@
+
+                <a class="btn btn-info" href="/Arama/Inceleme/@item.Id">İncele</a>
+            </td>
+        </tr>
+    }
+
+
+</table>

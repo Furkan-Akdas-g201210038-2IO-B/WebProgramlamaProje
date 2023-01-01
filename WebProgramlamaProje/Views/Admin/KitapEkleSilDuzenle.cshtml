@@ -1,0 +1,82 @@
+﻿@model Kitap
+
+
+
+<form id="form" method="post" asp-action="KitapEkle" asp-controller="Admin" class="row gy-2 gx-3 align-items-center">
+  <div class="col-auto">
+    <label class="visually-hidden" for="autoSizingInput">Name</label>
+    <input type="text" class="form-control" asp-for="Ad" placeholder="Kitap Adı">
+  </div>
+  <div class="col-auto">
+
+    <div class="input-group">
+      <div class="input-group-text"></div>
+      <input  type="text" class="form-control" asp-for="YazarAdi" placeholder="Yazar Adı">
+    </div>
+  </div>
+  <div class="col-auto">
+    <label class="visually-hidden" for="autoSizingSelect">Preference</label>
+        <select class="form-select" asp-for="Tur">
+      <option selected>Tür Seçin</option>
+            <option value="Edebiyat">Edebiyat</option>
+            <option value="BilimKurgu">BilimKurgu</option>
+            <option value="Macera">Macera</option>
+    </select>
+  </div>
+
+  <div class="col-auto">
+    <button id="btn" type="submit" class="btn btn-primary">Kitap Ekle</button>
+  </div>
+</form>
+
+
+
+@*Html.Partial("~/PartialViews/KitapEkle.cshtml")*@
+
+<br /><br />
+
+<table class="table table-bordered">
+
+    <tr>
+        <b>
+        <td>@Html.DisplayNameFor(model => model.Ad)</td></b>
+        <b>
+        <td>@Html.DisplayNameFor(model => model.YazarAdi)</td></b>
+        <b>
+        <td>@Html.DisplayNameFor(model => model.Tur)</td></b>
+        
+    </tr>
+
+   
+
+   
+
+    @foreach (var item in (ViewData["Kitaplar"] as List<Kitap>)) {
+            <tr>
+                <td>
+                 @Html.DisplayFor(modelItem => item.Ad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YazarAdi)
+                </td>
+                <td>
+                 @Html.DisplayFor(modelItem => item.Tur)
+                </td>
+                <td>
+                    @*Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) 
+                    @Html.ActionLink("Details", "Details", new {  id=item.Id  }) 
+                    @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })*@
+
+                <a class="btn btn-danger" href="/Admin/KitapGuncelle/@item.Id">Edit</a>
+                
+                <a class="btn btn-dark" href="/Admin/KitapSil/@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+
+    
+</table>
+
+
+
+<script src="~/js/ekleformutemizle.js"></script>

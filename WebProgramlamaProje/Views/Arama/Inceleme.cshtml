@@ -1,0 +1,60 @@
+﻿@using WebProgramlamaProje.ViewModels;
+
+@model KitapYorumKullanici;
+
+@{
+    int q = Convert.ToInt32(ViewData["UserKullaniciId"]);
+    int y = Convert.ToInt32(ViewData["KitapId"]);
+
+
+}
+
+<form asp-action="Inceleme" asp-controller="Arama" method="post">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Yorum Ekleyin</label>
+        <input name="Icerik" placeholder="Yorumunuzu Yazınız" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+    </div>
+    <input name="Kullanici" value="@q" type="hidden" class="" id="exampleInputEmail1">
+    <input name="Kitap" value="@y" type="hidden" class="" id="exampleInputEmail1">
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Yorumu Gönder</button>
+</form>
+<br />
+<br />
+
+
+
+<table class="table table-bordered">
+
+    <tr>
+        
+        <td>Yorumu Yazan</td>
+        
+        <td>Yorumu</td>
+       
+    </tr>
+
+
+
+
+
+    @foreach (var item in (ViewData["KitapYorumKullanici"] as List<KitapYorumKullanici>))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KullaniciAd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Icerik)
+            </td>
+           
+
+        </tr>
+    }
+
+
+</table>
+

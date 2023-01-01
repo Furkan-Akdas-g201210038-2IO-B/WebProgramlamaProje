@@ -16,7 +16,13 @@ public partial class DataContext : DbContext
     {
     }
 
+    public virtual DbSet<Kitap> Kitaps { get; set; }
+
     public virtual DbSet<Kullanici> Kullanicis { get; set; }
+
+    public virtual DbSet<Turler> Turlers { get; set; }
+
+    public virtual DbSet<Yorum> Yorums { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -24,6 +30,13 @@ public partial class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Yorum>(entity =>
+        {
+            entity.HasOne(d => d.KitapNavigation).WithMany(p => p.Yorums).OnDelete(DeleteBehavior.ClientSetNull);
+
+            entity.HasOne(d => d.KullaniciNavigation).WithMany(p => p.Yorums).OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
         OnModelCreatingPartial(modelBuilder);
     }
 
